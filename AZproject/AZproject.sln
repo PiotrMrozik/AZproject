@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AZprojectGUI", "AZprojectGUI\AZprojectGUI.csproj", "{BA00FCAD-1152-4025-BB72-5E0EC1888BF5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AZproject", "AZproject\AZproject.csproj", "{4D075000-01DF-456F-8016-32FADF54C881}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{0263B127-3408-4AA9-8BE5-2E8783E5A5D9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{BA00FCAD-1152-4025-BB72-5E0EC1888BF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA00FCAD-1152-4025-BB72-5E0EC1888BF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA00FCAD-1152-4025-BB72-5E0EC1888BF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D075000-01DF-456F-8016-32FADF54C881}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D075000-01DF-456F-8016-32FADF54C881}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D075000-01DF-456F-8016-32FADF54C881}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D075000-01DF-456F-8016-32FADF54C881}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0263B127-3408-4AA9-8BE5-2E8783E5A5D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0263B127-3408-4AA9-8BE5-2E8783E5A5D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0263B127-3408-4AA9-8BE5-2E8783E5A5D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0263B127-3408-4AA9-8BE5-2E8783E5A5D9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
