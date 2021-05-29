@@ -115,14 +115,16 @@ namespace Common
                     AddVariable(tempsplit[0]);
                     AddVariable(tempsplit[1]);
 
-                    // TODO: niepoprawne zachowanie dla (a|a) - poprawić
                     if (negated[0] && negated[1])
                     {
                         if (!G[namesInd[tempsplit[0]] * 2].Contains(namesInd[tempsplit[1]] * 2 + 1))
                         {
                             G[namesInd[tempsplit[0]] * 2].Add(namesInd[tempsplit[1]] * 2 + 1);
-                            G[namesInd[tempsplit[1]] * 2].Add(namesInd[tempsplit[0]] * 2 + 1);
                             GT[namesInd[tempsplit[1]] * 2 + 1].Add(namesInd[tempsplit[0]] * 2);
+                        }
+                        if (!G[namesInd[tempsplit[1]] * 2].Contains(namesInd[tempsplit[0]] * 2 + 1))
+                        {
+                            G[namesInd[tempsplit[1]] * 2].Add(namesInd[tempsplit[0]] * 2 + 1);
                             GT[namesInd[tempsplit[0]] * 2 + 1].Add(namesInd[tempsplit[1]] * 2);
                         }
                     }
@@ -131,8 +133,11 @@ namespace Common
                         if (!G[namesInd[tempsplit[0]] * 2].Contains(namesInd[tempsplit[1]] * 2))
                         {
                             G[namesInd[tempsplit[0]] * 2].Add(namesInd[tempsplit[1]] * 2);
-                            G[namesInd[tempsplit[1]] * 2 + 1].Add(namesInd[tempsplit[0]] * 2 + 1);
                             GT[namesInd[tempsplit[1]] * 2].Add(namesInd[tempsplit[0]] * 2);
+                        }
+                        if (!G[namesInd[tempsplit[1]] * 2 + 1].Contains(namesInd[tempsplit[0]] * 2 + 1))
+                        {
+                            G[namesInd[tempsplit[1]] * 2 + 1].Add(namesInd[tempsplit[0]] * 2 + 1);
                             GT[namesInd[tempsplit[0]] * 2 + 1].Add(namesInd[tempsplit[1]] * 2 + 1);
                         }
                     }
@@ -141,23 +146,51 @@ namespace Common
                         if (!G[namesInd[tempsplit[0]] * 2 + 1].Contains(namesInd[tempsplit[1]] * 2 + 1))
                         {
                             G[namesInd[tempsplit[0]] * 2 + 1].Add(namesInd[tempsplit[1]] * 2 + 1);
-                            G[namesInd[tempsplit[1]] * 2].Add(namesInd[tempsplit[0]] * 2);
                             GT[namesInd[tempsplit[1]] * 2 + 1].Add(namesInd[tempsplit[0]] * 2 + 1);
+                        }
+                        if (!G[namesInd[tempsplit[1]] * 2].Contains(namesInd[tempsplit[0]] * 2))
+                        {
+                            G[namesInd[tempsplit[1]] * 2].Add(namesInd[tempsplit[0]] * 2);
                             GT[namesInd[tempsplit[0]] * 2].Add(namesInd[tempsplit[1]] * 2);
                         }
                     }
-                    else if (!G[namesInd[tempsplit[0]] * 2 + 1].Contains(namesInd[tempsplit[1]] * 2))
+                    else
                     {
-                        G[namesInd[tempsplit[0]] * 2 + 1].Add(namesInd[tempsplit[1]] * 2);
-                        G[namesInd[tempsplit[1]] * 2 + 1].Add(namesInd[tempsplit[0]] * 2);
-                        GT[namesInd[tempsplit[1]] * 2].Add(namesInd[tempsplit[0]] * 2 + 1);
-                        GT[namesInd[tempsplit[0]] * 2].Add(namesInd[tempsplit[1]] * 2 + 1);
+                        if (!G[namesInd[tempsplit[0]] * 2 + 1].Contains(namesInd[tempsplit[1]] * 2))
+                        {
+                            G[namesInd[tempsplit[0]] * 2 + 1].Add(namesInd[tempsplit[1]] * 2);
+                            GT[namesInd[tempsplit[1]] * 2].Add(namesInd[tempsplit[0]] * 2 + 1);
+                        }
+                        if(!G[namesInd[tempsplit[1]] * 2 + 1].Contains(namesInd[tempsplit[0]] * 2))
+                        { 
+                            G[namesInd[tempsplit[1]] * 2 + 1].Add(namesInd[tempsplit[0]] * 2);
+                            GT[namesInd[tempsplit[0]] * 2].Add(namesInd[tempsplit[1]] * 2 + 1);
+                        }
                     }
                 }
                 else
                 {
                     temp = temp.Remove(temp.Length - 1, 1).Remove(0, 1).Trim();
+                    bool negated = false;
+                    if (temp[0] == '~')
+                    {
+                        negated = true;
+                        temp = temp.Remove(0, 1);
+                    }
                     AddVariable(temp);
+                    if (negated)
+                    {
+                        if (!G[namesInd[temp] * 2].Contains(namesInd[temp] * 2 + 1))
+                        {
+                            G[namesInd[temp] * 2].Add(namesInd[temp] * 2 + 1);
+                            GT[namesInd[temp] * 2 + 1].Add(namesInd[temp] * 2);
+                        }
+                    }
+                    else if (!G[namesInd[temp] * 2 + 1].Contains(namesInd[temp] * 2))
+                    {
+                        G[namesInd[temp] * 2 + 1].Add(namesInd[temp] * 2);
+                        GT[namesInd[temp] * 2].Add(namesInd[temp] * 2 + 1);
+                    }
                 }
             }
         }

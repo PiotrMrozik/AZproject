@@ -12,7 +12,7 @@ namespace AZproject
         {
             Algorithm a = new Algorithm();
             bool[] dudu;
-            var du = a.Perform2SAT("(a|b)&(b)&(c|b)&(a|~c)&(~a|~c)&(~a|c)&(c|c)", out dudu);
+            var du = a.Perform2SAT("(a|b)&(~b|~b)&(c|b)&(c|c)", out dudu);
             int b = 1 + 2;
         }
     }
