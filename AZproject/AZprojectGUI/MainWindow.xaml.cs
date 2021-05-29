@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,18 +23,24 @@ namespace AZprojectGUI
     {
         Start,
         FirstSymbol,
-        SecondSymbol
+        SecondSymbol,
+        Solved
     }
 
     public partial class MainWindow : Window
     {
         InputState state;
+        bool[] results;
+        Algorithm solver = new Algorithm();
 
         public MainWindow()
         {
             InitializeComponent();
             state = InputState.Start;
             FormulaTextbox.Text = "(";
+
+            
+            
         }
 
         private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -170,6 +177,26 @@ namespace AZprojectGUI
                 FormulaTextbox.Text = FormulaTextbox.Text[FormulaTextbox.Text.Length - 1] == '~'
                                 ? FormulaTextbox.Text.Remove(FormulaTextbox.Text.Length - 3, 3)
                                 : FormulaTextbox.Text.Remove(FormulaTextbox.Text.Length - 2, 2);
+
+                var solvability = solver.Perform2SAT(FormulaTextbox.Text, out results);
+
+                state = InputState.Solved;
+
+                if(solvability)
+                {
+                    resultsTextBlock.Text = "Formula is solvable for: \n";
+
+                    foreach (KeyValuePair<string, int> entry in solver.namesInd)
+                    {
+                        resultsTextBlock.Text += entry.Key + "=" + results[entry.Value] + ", ";
+                    }
+
+                }
+                else
+                {
+                    resultsTextBlock.Text = "Formula is not solvable! \n";
+                }
+
             }
         }
 
@@ -182,6 +209,7 @@ namespace AZprojectGUI
         private void clearButton_Click(object sender, RoutedEventArgs e)
         {
             FormulaTextbox.Text = "(";
+            resultsTextBlock.Text = "";
             state = InputState.Start;
         }
     }

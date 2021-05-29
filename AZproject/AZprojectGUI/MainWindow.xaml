@@ -39,6 +39,13 @@
                 <Button Name="clearButton" Content="Clear" Margin="1" Click="clearButton_Click"/>
             </StackPanel>
         </GroupBox>
+        <GroupBox Header="Results"  Grid.Row="1" Grid.Column="0">
+            <StackPanel>
+                <TextBlock Name="resultsTextBlock"/>
+
+
+            </StackPanel>
+        </GroupBox>
     </Grid>
    
 </Window>
