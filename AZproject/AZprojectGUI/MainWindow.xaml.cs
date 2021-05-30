@@ -19,7 +19,7 @@ namespace AZprojectGUI
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     /// 
-    enum InputState
+    public enum InputState
     {
         Start,
         FirstSymbol,
@@ -29,7 +29,7 @@ namespace AZprojectGUI
 
     public partial class MainWindow : Window
     {
-        InputState state;
+        public InputState state;
         bool[] results;
         Algorithm solver = new Algorithm();
 
@@ -183,6 +183,7 @@ namespace AZprojectGUI
         {
             if(state== InputState.FirstSymbol)
             {
+
                 FormulaTextbox.Text = FormulaTextbox.Text[FormulaTextbox.Text.Length - 1] == '~'
                                 ? FormulaTextbox.Text.Remove(FormulaTextbox.Text.Length - 3, 3)
                                 : FormulaTextbox.Text.Remove(FormulaTextbox.Text.Length - 2, 2);
@@ -220,6 +221,17 @@ namespace AZprojectGUI
             FormulaTextbox.Text = "(";
             resultsTextBlock.Text = "";
             state = InputState.Start;
+        }
+
+        private void generateButton_Click(object sender, RoutedEventArgs e)
+        {
+            generateDialog dialog = new generateDialog();
+            dialog.Show();
+        }
+
+        private void FormulaTextbox_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            refocusTextbox();
         }
     }
 }
