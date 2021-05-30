@@ -14,7 +14,8 @@ namespace AZproject
             bool[] dudu;
             var du = a.Perform2SAT("(a|b)&(~b|~b)&(c|b)&(c|c)", out dudu);
 
-            Console.WriteLine(Generator.GenerateFormula(4, 7));
+            for(int i=0;i<10; i++)
+             Console.WriteLine(Generator.GenerateFormula(4, 7));
         }
     }
 }

@@ -7,7 +7,7 @@ namespace Common
 {
     public class Generator
     {
-       
+        private static Random rand;
 
         /*Formula used to generate CNF formulas.
           /param[i] symbols number of different symbols in formula
@@ -18,14 +18,14 @@ namespace Common
         {
             char[] symbols=new char[numberOfSymbols];
             string result = "";
-
+            rand = new Random(Guid.NewGuid().GetHashCode());
             //generate dictionary
-            for(int i=0; i< numberOfSymbols; ++i)
+            for (int i=0; i< numberOfSymbols; ++i)
             {
                 symbols[i]=(char)(97+i);
             }
 
-            var rand = new Random();
+          
             //generate formula
             for (int i = 0; i< clauses; ++i)
             {
