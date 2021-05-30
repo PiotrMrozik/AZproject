@@ -18,7 +18,7 @@
         </Grid.RowDefinitions>
 
         <GroupBox Header="Formula" Grid.Row="0" Grid.Column="0" >
-            <TextBox Name="FormulaTextbox" 
+            <TextBox Name="FormulaTextbox" FontSize="18" 
                      PreviewTextInput="TextBox_PreviewTextInput" 
                      TextChanged="FormulaTextbox_TextChanged"
                      PreviewKeyDown="FormulaTextbox_PreviewKeyDown"
