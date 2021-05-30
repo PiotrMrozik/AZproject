@@ -38,9 +38,6 @@ namespace AZprojectGUI
             InitializeComponent();
             state = InputState.Start;
             FormulaTextbox.Text = "(";
-
-            
-            
         }
 
         private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -140,6 +137,18 @@ namespace AZprojectGUI
         {
             switch (state)
             {
+                case InputState.Start:
+                    if (FormulaTextbox.Text[FormulaTextbox.Text.Length - 1] != '~')
+                    {
+                        FormulaTextbox.Text += "~";
+                    }
+                    else
+                    {
+                        FormulaTextbox.Text = FormulaTextbox.Text.Remove(FormulaTextbox.Text.Length - 1, 1);
+                    }
+                    refocusTextbox();
+                    break;
+
                 case InputState.FirstSymbol:
                     if (FormulaTextbox.Text[FormulaTextbox.Text.Length - 1] != '~')
                     {
