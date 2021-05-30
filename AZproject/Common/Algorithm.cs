@@ -120,7 +120,7 @@ namespace Common
                         negated[1] = true;
                         tempsplit[1] = tempsplit[1].Remove(0, 1);
                     }
-                    if (!System.Text.RegularExpressions.Regex.IsMatch(tempsplit[0], "^[a-zA-Z][a-zA-Z1-9]*$") || !System.Text.RegularExpressions.Regex.IsMatch(tempsplit[1], "^[a-zA-Z][a-zA-Z1-9]*$"))
+                    if (!System.Text.RegularExpressions.Regex.IsMatch(tempsplit[0], "^[a-zA-Z][a-zA-Z0-9]*$") || !System.Text.RegularExpressions.Regex.IsMatch(tempsplit[1], "^[a-zA-Z][a-zA-Z0-9]*$"))
                     {
                         n = -1;
                         return;
@@ -138,7 +138,7 @@ namespace Common
                         negated = true;
                         temp = temp.Remove(0, 1);
                     }
-                    if (!System.Text.RegularExpressions.Regex.IsMatch(temp, "^[a-zA-Z][a-zA-Z1-9]*$"))
+                    if (!System.Text.RegularExpressions.Regex.IsMatch(temp, "^[a-zA-Z][a-zA-Z0-9]*$"))
                     {
                         n = -1;
                         return;

@@ -68,6 +68,24 @@ namespace AZproject
                 Console.WriteLine("Error: " + ex.Message);
                 return;
             }
+
+            //string test = "test";
+            //for(int i=1; i<100; i++)
+            //{
+            //    string stringResult = "";
+            //    for (int j = 0; j < 1000; j++)
+            //    {
+            //        stringResult += Generator.GenerateFormula(10 * i, 10 * i * 5) + ";\n";
+            //    }
+            //    File.WriteAllText(test+i+".txt", stringResult);
+            //}
+
+            //var file = File.Open("wyniki.txt",FileMode.OpenOrCreate);
+            //for (int i = 1; i < 100; i++)
+            //{
+
+            //}
+            //file.Close();
         }
     }
 }

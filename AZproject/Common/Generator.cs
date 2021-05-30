@@ -16,13 +16,13 @@ namespace Common
         */
         public static string GenerateFormula(int numberOfSymbols, int clauses)
         {
-            char[] symbols=new char[numberOfSymbols];
+            string[] symbols=new string[numberOfSymbols];
             string result = "";
             rand = new Random(Guid.NewGuid().GetHashCode());
             //generate dictionary
             for (int i=0; i< numberOfSymbols; ++i)
             {
-                symbols[i]=(char)(97+i);
+                symbols[i]="a"+i;
             }
 
           
