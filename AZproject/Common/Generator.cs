@@ -10,8 +10,8 @@ namespace Common
         private static Random rand;
 
         /*Formula used to generate CNF formulas.
-          /param[i] symbols number of different symbols in formula
-          /param[i] clauses number of clauses in equation
+          /param[i] number of different symbols in formula
+          /param[i] number of clauses in equation
           /return string with CNF formula
         */
         public static string GenerateFormula(int numberOfSymbols, int clauses)

@@ -19,6 +19,7 @@ namespace Common
         private bool[] assign;
         private int n;
 
+        // Main algorithm for solving the 2SAT problem, which was described in the initial documentation 
         public bool Perform2SAT(string formula, out bool[] Assign)
         {
             Assign = null;
@@ -83,6 +84,7 @@ namespace Common
                     TopoOrderSCC(u, ind);
         }
 
+        // Function building G and GT graphs from the given boolean formula 
         public void CreateGraphs(string formula)
         {
             n = 0;
