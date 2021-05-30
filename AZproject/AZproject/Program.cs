@@ -26,7 +26,7 @@ namespace AZproject
                 Console.WriteLine("Error: " + ex.Message);
                 return;
             }
-            if(text.Length==0)
+            if (text.Length == 0)
             {
                 Console.WriteLine("File is empty\n");
                 return;
@@ -39,7 +39,9 @@ namespace AZproject
             string stringResult = "";
 
             foreach (string formula in formulas)
-                if (a.Perform2SAT(formula, out result))
+                if (string.IsNullOrEmpty(formula))
+                    continue;
+                else if (a.Perform2SAT(formula, out result))
                 {
                     stringResult += "TRUE: ";
                     foreach (var item in a.namesInd)
@@ -51,7 +53,10 @@ namespace AZproject
                 }
                 else
                 {
-                    stringResult += "FALSE;\n";
+                    if (a.ErrorInFormula)
+                        stringResult += "Invalid formula;\n";
+                    else
+                        stringResult += "FALSE;\n";
                 }
 
             try
@@ -63,7 +68,6 @@ namespace AZproject
                 Console.WriteLine("Error: " + ex.Message);
                 return;
             }
-
         }
     }
 }

@@ -7,22 +7,30 @@ namespace Common
 {
     public class Algorithm
     {
+        public Dictionary<string, int> namesInd;
+        public bool ErrorInFormula = false;
+
         private bool[] used;
-        public List<HashSet<int>> G;
-        public List<HashSet<int>> GT;
+        private List<HashSet<int>> G;
+        private List<HashSet<int>> GT;
         private int index;
         private int[] order;
         private int[] sccindex;
         private bool[] assign;
-        public Dictionary<string, int> namesInd;
-        public int n;
+        private int n;
 
         public bool Perform2SAT(string formula, out bool[] Assign)
         {
             Assign = null;
             CreateGraphs(formula);
             if (n == -1)
+            {
+                ErrorInFormula = true;
                 return false;
+            }
+            else
+                ErrorInFormula = false;
+
             used = new bool[2 * n];
             order = new int[2 * n];
             index = 0;
@@ -85,7 +93,7 @@ namespace Common
             foreach (string bracket in split)
             {
                 string temp = bracket.Trim();
-                if (temp[0] != '(' || temp[temp.Length - 1] != ')')
+                if (temp.Length < 3 || temp[0] != '(' || temp[temp.Length - 1] != ')')
                 {
                     n = -1;
                     return;
@@ -112,6 +120,11 @@ namespace Common
                         negated[1] = true;
                         tempsplit[1] = tempsplit[1].Remove(0, 1);
                     }
+                    if (!System.Text.RegularExpressions.Regex.IsMatch(tempsplit[0], "^[a-zA-Z][a-zA-Z1-9]*$") || !System.Text.RegularExpressions.Regex.IsMatch(tempsplit[1], "^[a-zA-Z][a-zA-Z1-9]*$"))
+                    {
+                        n = -1;
+                        return;
+                    }
                     AddVariable(tempsplit[0]);
                     AddVariable(tempsplit[1]);
                     AddEdges(tempsplit[0], tempsplit[1], negated[0], negated[1]);
@@ -124,6 +137,11 @@ namespace Common
                     {
                         negated = true;
                         temp = temp.Remove(0, 1);
+                    }
+                    if (!System.Text.RegularExpressions.Regex.IsMatch(temp, "^[a-zA-Z][a-zA-Z1-9]*$"))
+                    {
+                        n = -1;
+                        return;
                     }
                     AddVariable(temp);
                     if (negated)
