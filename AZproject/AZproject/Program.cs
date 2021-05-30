@@ -39,7 +39,7 @@ namespace AZproject
             string stringResult = "";
 
             foreach (string formula in formulas)
-                if (string.IsNullOrEmpty(formula))
+                if (string.IsNullOrEmpty(formula.Trim()))
                     continue;
                 else if (a.Perform2SAT(formula, out result))
                 {
