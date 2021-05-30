@@ -8,8 +8,8 @@ namespace Common
     public class Algorithm
     {
         private bool[] used;
-        public List<List<int>> G;
-        public List<List<int>> GT;
+        public List<HashSet<int>> G;
+        public List<HashSet<int>> GT;
         private int index;
         private int[] order;
         private int[] sccindex;
@@ -78,8 +78,8 @@ namespace Common
         public void CreateGraphs(string formula)
         {
             n = 0;
-            G = new List<List<int>>();
-            GT = new List<List<int>>();
+            G = new List<HashSet<int>>();
+            GT = new List<HashSet<int>>();
             namesInd = new Dictionary<string, int>();
             string[] split = formula.Split('&');
             foreach (string bracket in split)
@@ -114,59 +114,7 @@ namespace Common
                     }
                     AddVariable(tempsplit[0]);
                     AddVariable(tempsplit[1]);
-
-                    if (negated[0] && negated[1])
-                    {
-                        if (!G[namesInd[tempsplit[0]] * 2].Contains(namesInd[tempsplit[1]] * 2 + 1))
-                        {
-                            G[namesInd[tempsplit[0]] * 2].Add(namesInd[tempsplit[1]] * 2 + 1);
-                            GT[namesInd[tempsplit[1]] * 2 + 1].Add(namesInd[tempsplit[0]] * 2);
-                        }
-                        if (!G[namesInd[tempsplit[1]] * 2].Contains(namesInd[tempsplit[0]] * 2 + 1))
-                        {
-                            G[namesInd[tempsplit[1]] * 2].Add(namesInd[tempsplit[0]] * 2 + 1);
-                            GT[namesInd[tempsplit[0]] * 2 + 1].Add(namesInd[tempsplit[1]] * 2);
-                        }
-                    }
-                    else if (negated[0])
-                    {
-                        if (!G[namesInd[tempsplit[0]] * 2].Contains(namesInd[tempsplit[1]] * 2))
-                        {
-                            G[namesInd[tempsplit[0]] * 2].Add(namesInd[tempsplit[1]] * 2);
-                            GT[namesInd[tempsplit[1]] * 2].Add(namesInd[tempsplit[0]] * 2);
-                        }
-                        if (!G[namesInd[tempsplit[1]] * 2 + 1].Contains(namesInd[tempsplit[0]] * 2 + 1))
-                        {
-                            G[namesInd[tempsplit[1]] * 2 + 1].Add(namesInd[tempsplit[0]] * 2 + 1);
-                            GT[namesInd[tempsplit[0]] * 2 + 1].Add(namesInd[tempsplit[1]] * 2 + 1);
-                        }
-                    }
-                    else if (negated[1])
-                    {
-                        if (!G[namesInd[tempsplit[0]] * 2 + 1].Contains(namesInd[tempsplit[1]] * 2 + 1))
-                        {
-                            G[namesInd[tempsplit[0]] * 2 + 1].Add(namesInd[tempsplit[1]] * 2 + 1);
-                            GT[namesInd[tempsplit[1]] * 2 + 1].Add(namesInd[tempsplit[0]] * 2 + 1);
-                        }
-                        if (!G[namesInd[tempsplit[1]] * 2].Contains(namesInd[tempsplit[0]] * 2))
-                        {
-                            G[namesInd[tempsplit[1]] * 2].Add(namesInd[tempsplit[0]] * 2);
-                            GT[namesInd[tempsplit[0]] * 2].Add(namesInd[tempsplit[1]] * 2);
-                        }
-                    }
-                    else
-                    {
-                        if (!G[namesInd[tempsplit[0]] * 2 + 1].Contains(namesInd[tempsplit[1]] * 2))
-                        {
-                            G[namesInd[tempsplit[0]] * 2 + 1].Add(namesInd[tempsplit[1]] * 2);
-                            GT[namesInd[tempsplit[1]] * 2].Add(namesInd[tempsplit[0]] * 2 + 1);
-                        }
-                        if(!G[namesInd[tempsplit[1]] * 2 + 1].Contains(namesInd[tempsplit[0]] * 2))
-                        { 
-                            G[namesInd[tempsplit[1]] * 2 + 1].Add(namesInd[tempsplit[0]] * 2);
-                            GT[namesInd[tempsplit[0]] * 2].Add(namesInd[tempsplit[1]] * 2 + 1);
-                        }
-                    }
+                    AddEdges(tempsplit[0], tempsplit[1], negated[0], negated[1]);
                 }
                 else
                 {
@@ -200,14 +148,30 @@ namespace Common
             if (!namesInd.ContainsKey(v))
             {
                 namesInd.Add(v, n);
-                G.Add(new List<int>());
-                G.Add(new List<int>());
-                GT.Add(new List<int>());
-                GT.Add(new List<int>());
+                G.Add(new HashSet<int>());
+                G.Add(new HashSet<int>());
+                GT.Add(new HashSet<int>());
+                GT.Add(new HashSet<int>());
                 n++;
                 return true;
             }
             return false;
+        }
+
+        private void AddEdges(string a, string b, bool aneg, bool bneg)
+        {
+            int an = aneg ? 1 : 0;
+            int bn = bneg ? 1 : 0;
+            if (!G[namesInd[a] * 2 + 1 - an].Contains(namesInd[b] * 2 + bn))
+            {
+                G[namesInd[a] * 2 + 1 - an].Add(namesInd[b] * 2 + bn);
+                GT[namesInd[b] * 2 + bn].Add(namesInd[a] * 2 + 1 - an);
+            }
+            if (!G[namesInd[b] * 2 + 1 - bn].Contains(namesInd[a] * 2 + an))
+            {
+                G[namesInd[b] * 2 + 1 - bn].Add(namesInd[a] * 2 + an);
+                GT[namesInd[a] * 2 + an].Add(namesInd[b] * 2 + 1 - bn);
+            }
         }
     }
 }
