@@ -13,6 +13,8 @@ namespace AZproject
             Algorithm a = new Algorithm();
             bool[] dudu;
             var du = a.Perform2SAT("(a|b)&(~b|~b)&(c|b)&(c|c)", out dudu);
+
+            Console.WriteLine(Generator.GenerateFormula(4, 7));
         }
     }
 }
