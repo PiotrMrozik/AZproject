@@ -44,7 +44,7 @@ namespace AZproject
                     stringResult += "TRUE: ";
                     foreach (var item in a.namesInd)
                     {
-                        stringResult += $"({item.Key}:{result[item.Value]}), ";
+                        stringResult += $"({item.Key}:{result[item.Value].ToString().ToUpper()}), ";
                     }
                     stringResult = stringResult.Remove(stringResult.Length - 2, 2);
                     stringResult += ";\n";
